@@ -1,0 +1,76 @@
+/* Header and logo effects */
+.header {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__logo {
+  display: flex;
+  flex: 1;
+}
+
+.header__logo::after{
+  content:"";
+  display:block;
+  width:100%;
+  margin-left:12px;
+
+  --bar-thickness:2px;   
+  --bar-period:14px;     
+  --logo-fade-hold:18%;  
+  --apex-y:52%;          
+
+  
+  background:linear-gradient(90deg,
+    #ff0040 0%, #ff7a00 16%, #ffd400 32%, #3bd100 48%,
+    #00d0ff 64%, #2a44ff 80%, #8a2be2 100%);
+
+  
+  -webkit-mask-image:
+    repeating-linear-gradient(90deg,#000 0 var(--bar-thickness),transparent var(--bar-thickness) var(--bar-period)),
+    linear-gradient(90deg,#000 0,var(--logo-fade-hold),rgba(0,0,0,.85) 70%, rgba(0,0,0,0) 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    repeating-linear-gradient(90deg,#000 0 var(--bar-thickness),transparent var(--bar-thickness) var(--bar-period)),
+    linear-gradient(90deg,#000 0,var(--logo-fade-hold),rgba(0,0,0,.85) 70%, rgba(0,0,0,0) 100%);
+  mask-composite: intersect;
+
+  
+  clip-path: polygon(0 0, 100% var(--apex-y), 0 100%);
+  align-self: stretch;
+}
+
+.header__logo a {
+  flex: 0 0 auto;
+  max-width: 100%;
+  text-decoration: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--background);
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+@media print {
+  .header {
+    display: none;
+  }
+}
+
+
+.header { padding-top: 6px; }
+.header__inner { margin-bottom: 10px; }
+
+.logo { border-radius: 8px; }

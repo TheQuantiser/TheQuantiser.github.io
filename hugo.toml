@@ -1,0 +1,118 @@
+baseURL = "https://thequantiser.github.io/"
+languageCode = "en-us"
+title = "Mohammad Abrar Wadud"
+theme = "aurora"
+pagination = { pagerSize = 1 }
+googleAnalytics = "G-BPYYB1DYJS"
+copyright = "© 2025 Mohammad Abrar Wadud"
+
+[sitemap]
+changefreq = "monthly"
+priority   = 0.5
+filename   = "sitemap.xml"
+
+[params]
+  centerTheme = true
+  contentTypeName = "posts"
+  showMenuItems = 20
+  fullWidthTheme = false
+  autoCover = true
+  showLastUpdated = false
+  math = true
+  mathEngine = "katex"
+  subtitle = ""
+  Keywords = ["physics", "CMS", "research"]
+
+  [params.logo]
+    logoText = "Mohammad Abrar Wadud"
+    logoHomeLink = "/"
+
+[menu]
+  # Top level
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    pageRef = "/_index.md"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "research"
+    name = "Research"
+    url = "/research/"
+    pageRef = "/research/_index.md"
+    weight = 2
+
+    # children under Research
+    [[menu.main]]
+      parent = "research"
+      identifier = "unpacked"
+      name = "Unpacked"
+      url = "/research/unpacked/"
+      pageRef = "/research/unpacked/_index.md"
+      weight = 1
+
+    [[menu.main]]
+      parent = "research"
+      identifier = "collider-methods"
+      name = "Collider Methods"
+      url = "/research/collider-methods/"
+      pageRef = "/research/collider-methods/_index.md"
+      weight = 2
+
+    [[menu.main]]
+      parent = "research"
+      identifier = "ml"
+      name = "ML"
+      url = "/research/ml/"
+      pageRef = "/research/ml/_index.md"
+      weight = 3
+
+  [[menu.main]]
+    identifier = "exteriors"
+    name = "Exteriors"
+    url = "/outside-the-lab/"
+    pageRef = "/outside-the-lab/_index.md"
+    weight = 3
+
+    # children under Exteriors
+    [[menu.main]]
+      parent = "exteriors"
+      identifier = "contested-orders"
+      name = "Contested Orders"
+      url = "/outside-the-lab/contested-orders/"
+      pageRef = "/outside-the-lab/contested-orders/_index.md"
+      weight = 1
+
+    [[menu.main]]
+      parent = "exteriors"
+      identifier = "edible-lagrangians"
+      name = "Edible Lagrangians"
+      url = "/outside-the-lab/edible-lagrangians/"
+      pageRef = "/outside-the-lab/edible-lagrangians/_index.md"
+      weight = 2
+
+  [[menu.main]]
+    identifier = "bio"
+    name = "Bio"
+    url = "/bio/"
+    pageRef = "/bio/_index.md"
+    weight = 4
+
+  [[menu.main]]
+    name = "Search"
+    url  = "/search/"
+    weight = 99
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          # Block math
+          block = [['\\[', '\\]'], ['$$', '$$']]
+          # Inline math
+          inline = [['\\(', '\\)'], ['$', '$']]
+  [markup.highlight]
+    noClasses = false

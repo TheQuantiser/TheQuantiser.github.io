@@ -1,0 +1,57 @@
+{{/* Home page lists recent posts with pagination */}}
+{{ define "main" }}
+  {{/* Optional intro content from _index.md */}}
+  {{ if .Content }}
+    <div class="index-content{{ if .Params.framed }} framed{{ end }}">
+      {{ .Content }}
+    </div>
+  {{ end }}
+
+  {{/* Resolve which content type to show */}}
+  {{ $ct := trim $.Site.Params.contentTypeName " " }}
+  {{ $contentType := cond (and $ct (ne $ct "posts")) $ct "posts" }}
+
+  {{/* Paginate over matching pages */}}
+  {{ $ctx := . }}
+  {{ if .IsHome }}{{ $ctx = .Site }}{{ end }}
+  {{ $paginator := .Paginate (where $ctx.RegularPages "Type" $contentType) }}
+
+  <div class="posts">
+    {{ range $paginator.Pages }}
+      <article class="post on-list">
+        <h2 class="post-title"><a href="{{ .Permalink }}">{{ .Title | markdownify }}</a></h2>
+
+        <div class="post-meta">
+          {{ with .Date }}<time class="post-date">{{ partial "post-date" $ }}</time>{{ end }}
+          {{ with .Params.Author }}<span class="post-author">{{ . }}</span>{{ end }}
+        </div>
+
+        {{ with .Params.tags }}
+          <span class="post-tags">
+            {{ range . }}#<a href="{{ (urlize (printf "tags/%s/" .)) | absLangURL }}">{{ . }}</a>&nbsp;{{ end }}
+          </span>
+        {{ end }}
+
+        {{ partial "cover.html" . }}
+
+        <div class="post-content">
+          {{ if .Params.showFullContent }}
+            {{ .Content }}
+          {{ else if .Description }}
+            <p>{{ .Description | markdownify }}</p>
+          {{ else }}
+            {{ .Summary }}
+          {{ end }}
+        </div>
+
+        {{ if not .Params.showFullContent }}
+          <div>
+            <a class="read-more button inline" href="{{ .RelPermalink }}">[{{ $.Site.Params.ReadMore }}]</a>
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+  </div>
+{{ end }}

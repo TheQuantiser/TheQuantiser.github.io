@@ -1,0 +1,7 @@
+{{/* Desktop navigation menu */}}
+<nav class="navigation-menu" aria-label="Main">
+  {{ $page := . }}
+  <ul class="navigation-menu__inner menu--desktop">
+    {{ partial "menu-items.html" (dict "page" $page "items" .Site.Menus.main "mobile" false) }}
+  </ul>
+</nav>

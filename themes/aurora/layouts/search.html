@@ -1,0 +1,27 @@
+{{ define "main" }}
+  <div class="index-content framed">
+    <h1>Search</h1>
+
+    {{/* Mount point for PagefindUI */}}
+    <div id="search"></div>
+
+    {{/* Load Pagefind assets */}}
+    <link href='{{ "pagefind/pagefind-ui.css" | relURL }}' rel="stylesheet">
+    <script src='{{ "pagefind/pagefind-ui.js" | relURL }}'></script>
+
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const ui = new PagefindUI({
+          element: '#search',
+          showSubResults: true,
+          pageSize: 10,
+          translations: { placeholder: 'Search the site' }
+        });
+
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        if (q) ui.triggerSearch(q);
+      });
+    </script>
+  </div>
+{{ end }}

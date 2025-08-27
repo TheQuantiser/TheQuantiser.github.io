@@ -1,0 +1,17 @@
+{{/* Site footer with copyright info */}}
+<footer class="footer" data-pagefind-ignore>
+  <div class="footer__inner">
+    <div class="copyright copyright--user">
+      <span>
+        {{ with site.Copyright }}
+          {{ . | safeHTML }}
+        {{ else }}
+          © {{ now.Year }} {{ site.Params.author | default site.Title }}
+        {{ end }}
+      </span>
+    </div>
+  </div>
+</footer>
+
+{{/* Optional extra footer content */}}
+{{ partial "extended_footer.html" . }}

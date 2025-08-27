@@ -1,0 +1,5 @@
+/* GitHub Gist adjustments */
+body .gist .blob-num,
+body .gist .blob-code-inner {
+  border: none;
+}

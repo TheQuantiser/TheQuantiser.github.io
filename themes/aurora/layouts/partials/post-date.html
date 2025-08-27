@@ -1,0 +1,11 @@
+{{/* Publication date formatted from page or site settings */}}
+{{ $date := .Date }}
+{{ with .Params.dateFormat }}
+  {{ $date | time.Format . }}
+{{ else }}
+  {{ with .Site.Params.dateFormat }}
+    {{ $date | time.Format . }}
+  {{ else }}
+    {{ $date | time.Format "2006-01-02" }}
+  {{ end }}
+{{ end }}

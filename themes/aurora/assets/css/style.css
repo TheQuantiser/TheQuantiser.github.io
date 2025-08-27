@@ -1,0 +1,369 @@
+/* Theme tokens */
+/* Theme variables */
+:root {
+  --background: #f7f7eb;
+  --foreground: #000000;
+  --accent: #000000;
+  --container-max-width: 1200px;
+  --content-max-width: 90ch;
+  --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
+  --pagefind-ui-font: inherit;
+  --pagefind-ui-primary: var(--accent);
+  --pagefind-ui-text: var(--foreground);
+  --pagefind-ui-background: var(--background);
+  --pagefind-ui-border: color-mix(in srgb, var(--foreground) 25%, transparent);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: var(--radius);
+  --pagefind-ui-spacing: 8px;
+}
+
+/* Dark theme overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1a170f;
+    --foreground: #eceae5;
+    --accent: #eceae5;
+    --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
+  }
+}
+
+/* Global element tweaks */
+img,
+iframe[src*="youtube.com"] {
+  border-width: 4px !important;
+  border-color: color-mix(in srgb, var(--accent) 70%, transparent) !important;
+}
+
+blockquote {
+  border-top:    1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 70%, transparent);
+  background:    color-mix(in srgb, var(--foreground) 3%, transparent);
+}
+
+code,
+kbd {
+  border-color: color-mix(in srgb, var(--foreground) 20%, transparent);
+  background:   color-mix(in srgb, var(--foreground) 6%,  transparent);
+  color:        color-mix(in srgb, var(--foreground) 10%, var(--accent));
+}
+
+.header__logo .logo { box-shadow: none; }
+/* Comfortable reading width */
+.post .post-content,
+.index-content {
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+}
+
+.footer { opacity: .70; }
+
+/* Navigation (desktop) */
+.navigation-menu__inner a {
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+.navigation-menu__inner a:hover {
+  text-decoration: none;
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+
+
+/* Align top-level items */
+.navigation-menu__inner > li {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+
+/* Nested menu container */
+.navigation-menu .menu { position: relative; }
+
+/* Parent label + caret inline */
+.navigation-menu .menu__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/* Caret button */
+.navigation-menu .menu__caret-btn {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  cursor: pointer;
+  line-height: 1;
+}
+.navigation-menu .menu__caret-btn:hover { background: transparent; }
+.navigation-menu .menu__caret-btn:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+
+/* Dropdown hidden by default */
+.navigation-menu .menu__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 2px;                   
+  z-index: 1000;
+
+  display: flex;                     
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin-inline: 0;
+  padding: 8px 12px;
+
+  background: var(--background);
+  border: 1px solid color-mix(in srgb, var(--foreground) 25%, transparent);
+  border-radius: var(--radius);
+
+  
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(2px);
+  pointer-events: none;
+
+  
+  transition:
+    opacity .12s ease-out,
+    transform .12s ease-out,
+    visibility 0s linear .12s;
+}
+
+
+/* Visible when menu is open */
+.navigation-menu .menu.open .menu__dropdown {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition-delay: 0s, 0s, 0s;
+}
+
+
+/* Active item styling */
+.navigation-menu__inner a[aria-current],
+.navigation-menu .menu__dropdown a[aria-current]{
+  text-decoration: none;
+  box-shadow: inset 0 -3px 0 var(--accent);
+  font-weight: 700;
+}
+
+
+@media (max-width: 684px) {
+  
+  .menu--mobile details > summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    cursor: pointer;
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .menu--mobile details > summary:hover {
+    text-decoration: underline;
+  }
+  .menu--mobile details > summary::-webkit-details-marker {
+    display: none;
+  }
+  .menu--mobile details > summary:after {
+    content: "▸";
+    margin-left: 4px;
+    transition: transform .12s ease-out;
+  }
+  .menu--mobile details[open] > summary:after {
+    transform: rotate(90deg);
+  }
+  .menu--mobile details > .menu__dropdown {
+    position: static;
+    display: none;
+    margin: 6px 0 0 12px;
+    padding: 0;
+    list-style: none;
+  }
+  .menu--mobile details[open] > .menu__dropdown {
+    display: block;
+  }
+  .menu--mobile details > .menu__dropdown li {
+    margin-bottom: 6px;
+  }
+}
+
+
+
+.theme-toggle {
+  position: fixed;
+  
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 1000; 
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.theme-toggle:hover { background: transparent; }
+.theme-toggle:focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+@media (min-width: 900px) {
+  .theme-toggle {
+    right: clamp(16px, 2vw, 24px);
+    bottom: clamp(16px, 2vw, 24px);
+  }
+}
+
+
+/* Search UI overrides */
+#search .pagefind-ui__wrapper {
+  background: transparent;
+  width: 100%;
+}
+#search .pagefind-ui__results-area,
+#search .pagefind-ui__drawer {
+  border: none;
+  box-shadow: none;
+  width: 100%;
+}
+
+
+#search .pagefind-ui__search-input-wrapper {
+  position: relative;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  width: 100%;
+}
+#search .pagefind-ui__search-input {
+  padding-left: 40px !important;
+  padding-right: 64px !important;
+  border: 1px solid var(--foreground);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--foreground);
+  width: 100%;
+}
+#search .pagefind-ui__search-input:focus {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+  border-color: var(--accent);
+}
+
+
+#search .pagefind-ui__search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+#search .pagefind-ui__search-clear {
+  right: 8px;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  box-shadow: none;
+}
+#search .pagefind-ui__drawer svg { color: var(--accent); }
+
+
+#search .pagefind-ui__results,
+#search .pagefind-ui__results-area { background: transparent; }
+#search .pagefind-ui__result {
+  padding: 20px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+#search .pagefind-ui__result:last-child { border-bottom: none; }
+
+#search .pagefind-ui__result-title a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 2px dotted var(--accent);
+  padding-bottom: 4px;
+}
+#search .pagefind-ui__result-title a:hover {
+  box-shadow: inset 0 -2px 0 var(--accent);
+}
+
+#search .pagefind-ui__result-excerpt,
+#search .pagefind-ui__message,
+#search .pagefind-ui__result-link {
+  color: color-mix(in srgb, var(--foreground) 65%, transparent);
+}
+
+#search mark,
+#search .pagefind-ui__result-mark {
+  background: color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--foreground);
+}
+
+#search .pagefind-ui__button {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+#search .pagefind-ui__button:hover {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+#search .pagefind-ui__result-type {
+  color: var(--foreground);
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Accessibility focus styles */
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 1px solid var(--accent);
+  outline-offset: 2px;
+}
+
+
+/* Manual theme override */
+html[data-theme="light"] {
+  --background: #f7f7eb;
+  --foreground: #000000;
+  --accent:     #000000;
+  --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+html[data-theme="dark"] {
+  --background: #1a170f;
+  --foreground: #eceae5;
+  --accent:     #eceae5;
+  --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
+}
+

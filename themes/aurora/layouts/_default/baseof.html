@@ -1,0 +1,30 @@
+{{/* Root layout providing global structure */}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{ block "title" . }}<title>{{ if .IsHome }}{{ $.Site.Title }}{{ else }}{{ .Title }} :: {{ $.Site.Title }}{{ end }}</title>{{ end }}
+  {{ partial "head.html" . }}
+</head>
+<body>
+  {{/* Determine wrapper classes from site parameters */}}
+  {{ $full  := $.Site.Params.FullWidthTheme | default false }}
+  {{ $center := $.Site.Params.CenterTheme   | default false }}
+  {{ $one   := $.Site.Params.oneHeadingSize | default false }}
+  {{ $container := cond $full "container full" (cond $center "container center" "container") }}
+
+  <div class="{{ $container }}{{ if $one }} headings--one-size{{ end }}">
+    {{/* Site header with logo and navigation */}}
+    {{ partial "header.html" . }}
+
+    {{/* Primary content area indexed by Pagefind */}}
+    <main class="content" id="main" data-pagefind-body>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{/* Footer injected by child templates or default partial */}}
+    {{ block "footer" . }}
+      {{ partial "footer.html" . }}
+    {{ end }}
+  </div>
+</body>
+</html>

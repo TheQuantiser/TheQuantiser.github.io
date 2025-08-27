@@ -1,0 +1,13 @@
+name = "aurora"
+license = "MIT"
+licenselink = "LICENSE.md"
+description = "Customized aurora-inspired theme for Hugo."
+homepage = "https://thequantiser.github.io"
+demosite = "https://thequantiser.github.io"
+tags = ["blog", "dark", "retro", "search", "math"]
+features = ["blog", "dark mode", "search", "math"]
+min_version = 0.90
+
+[author]
+  name = "Mohammad Abrar Wadud"
+  homepage = "https://thequantiser.github.io"

@@ -1,0 +1,76 @@
+{{/* Apply stored theme preference before paint */}}
+<script>
+(function () {
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'light' || t === 'dark') {
+      document.documentElement.setAttribute('data-theme', t);
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  } catch (e) {}
+})();
+</script>
+
+{{/* Prefetch search assets */}}
+<link rel="prefetch" href='{{ "pagefind/pagefind.js" | relURL }}' as="script">
+<link rel="prefetch" href='{{ "pagefind/pagefind.json" | relURL }}' as="fetch" type="application/json" crossorigin="anonymous">
+
+{{- $mathEnabled := .Param "math" | default (site.Param "math") | default false -}}
+{{- if $mathEnabled -}}
+  {{- $engine := .Param "mathEngine" | default (site.Param "mathEngine") | default "katex" -}}
+
+  {{- if eq (lower $engine) "mathjax" -}}
+    {{/* MathJax loader */}}
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)'], ['$', '$']],
+          displayMath: [['\\[', '\\]'], ['$$', '$$']],
+          packages: {'[+]': ['ams', 'mhchem', 'physics', 'color', 'noerrors', 'noundefined']}
+        },
+        loader: {load: ['[tex]/ams', '[tex]/mhchem', '[tex]/physics', '[tex]/color', 'ui/safe']},
+        options: {}
+      };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+  {{- else -}}
+    {{/* KaTeX loader with auto-render */}}
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
+      integrity="sha384-zh0CIslj+VczCZtlzBcjt5ppRcsAmDnRem7ESsYwWwg3m/OaJ2l4x7YBZl9Kxxib"
+      crossorigin="anonymous">
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.js"
+      integrity="sha384-Rma6DA2IPUwhNxmrB/7S3Tno0YY7sFu9WSYMCuulLhIqYSGZ2gKCJWIqhBWqMQfh"
+      crossorigin="anonymous"></script>
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/auto-render.min.js"
+      integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
+      crossorigin="anonymous"></script>
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/mhchem.min.js"
+      crossorigin="anonymous"></script>
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/physics.min.js"
+      crossorigin="anonymous"></script>
+    <script defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/contrib/copy-tex.min.js"
+      crossorigin="anonymous"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: '\\[', right: '\\]', display: true},
+            {left: '$$', right: '$$', display: true},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '$', right: '$', display: false},
+          ],
+          throwOnError: false
+        });
+      });
+    </script>
+  {{- end -}}
+{{- end -}}

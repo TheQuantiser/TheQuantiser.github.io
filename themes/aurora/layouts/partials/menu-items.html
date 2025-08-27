@@ -1,0 +1,42 @@
+{{/* Recursive menu item renderer */}}
+{{ $page := .page }}
+{{ range .items }}
+  {{/* Determine active state */}}
+  {{ $isHome := or (eq .URL "/") (eq .Identifier "home") }}
+  {{ $prefix := and (not $isHome) (and .URL (hasPrefix $page.RelPermalink .URL)) }}
+  {{ $active := or ($page.IsMenuCurrent "main" .) ($page.HasMenuCurrent "main" .) (and $isHome $page.IsHome) $prefix }}
+
+  {{ if .HasChildren }}
+    {{ if $.mobile }}
+      <li>
+        <details{{ if $active }} open{{ end }}>
+          <summary>{{ .Name }}</summary>
+          <ul class="menu__dropdown">
+            <li>
+              <a href="{{ .URL }}" {{ if .Params.NewTab }}target="_blank" rel="noopener"{{ end }} {{ if $active }}aria-current="page"{{ end }}>{{ .Name }}</a>
+            </li>
+            {{ partial "menu-items.html" (dict "page" $page "items" .Children "mobile" $.mobile) }}
+          </ul>
+        </details>
+      </li>
+    {{ else }}
+      <li>
+        <ul class="menu">
+          <li class="menu__trigger">
+            <a class="menu__trigger-link" href="{{ .URL }}" {{ if $active }}aria-current="page"{{ end }}>{{ .Name }}</a>
+            <button class="menu__caret-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Show submenu">▾</button>
+          </li>
+          <li>
+            <ul class="menu__dropdown" aria-label="{{ .Name }} submenu">
+              {{ partial "menu-items.html" (dict "page" $page "items" .Children "mobile" $.mobile) }}
+            </ul>
+          </li>
+        </ul>
+      </li>
+    {{ end }}
+  {{ else }}
+    <li>
+      <a href="{{ .URL }}" {{ if .Params.NewTab }}target="_blank" rel="noopener"{{ end }} {{ if $active }}aria-current="page"{{ end }}>{{ .Name }}</a>
+    </li>
+  {{ end }}
+{{ end }}

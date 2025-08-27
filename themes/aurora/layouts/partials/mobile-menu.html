@@ -1,0 +1,10 @@
+{{/* Mobile navigation dropdown */}}
+{{ $page := . }}
+<ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      {{ partial "menu-items.html" (dict "page" $page "items" $.Site.Menus.main "mobile" true) }}
+    </ul>
+  </li>
+</ul>
