@@ -12,7 +12,7 @@ a.button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 18px;
+  padding: var(--button-padding-large, 8px 18px);
   text-decoration: none;
   text-align: center;
   font: inherit;
@@ -27,7 +27,7 @@ button.outline,
 a.button.outline {
   background: transparent;
   box-shadow: none;
-  padding: 8px 18px;
+  padding: var(--button-padding-large, 8px 18px);
 }
 
 button.outline :hover,
@@ -53,8 +53,8 @@ a.button.small {
 button.wide,
 .button.wide,
 a.button.wide {
-  min-width: 200px;
-  padding: 14px 24px;
+  min-width: var(--button-min-width, 200px);
+  padding: var(--button-padding-wide, 14px 24px);
 }
 
 a.button.inline {

@@ -60,7 +60,7 @@
   background: var(--accent);
   color: var(--background);
   font-weight: bold;
-  padding: 5px 10px;
+  padding: var(--logo-padding, 5px 10px);
 }
 
 @media print {
@@ -70,7 +70,7 @@
 }
 
 
-.header { padding-top: 6px; }
-.header__inner { margin-bottom: 10px; }
+.header { padding-top: var(--header-padding-top, 6px); }
+.header__inner { margin-bottom: var(--header-inner-margin-bottom, 10px); }
 
-.logo { border-radius: 8px; }
+.logo { border-radius: var(--logo-border-radius, 8px); }

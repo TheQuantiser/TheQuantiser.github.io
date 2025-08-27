@@ -1,11 +1,6 @@
 /* Theme tokens */
 /* Theme variables */
 :root {
-  --background: #f7f7eb;
-  --foreground: #000000;
-  --accent: #000000;
-  --container-max-width: 1200px;
-  --content-max-width: 90ch;
   --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
   --pagefind-ui-font: inherit;
   --pagefind-ui-primary: var(--accent);
@@ -20,9 +15,9 @@
 /* Dark theme overrides */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #1a170f;
-    --foreground: #eceae5;
-    --accent: #eceae5;
+    --background: var(--dark-background, #1a170f);
+    --foreground: var(--dark-foreground, #eceae5);
+    --accent: var(--dark-accent, #eceae5);
     --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
   }
 }
@@ -355,15 +350,15 @@ kbd {
 
 /* Manual theme override */
 html[data-theme="light"] {
-  --background: #f7f7eb;
-  --foreground: #000000;
-  --accent:     #000000;
+  --background: var(--background);
+  --foreground: var(--foreground);
+  --accent:     var(--accent);
   --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
 }
 html[data-theme="dark"] {
-  --background: #1a170f;
-  --foreground: #eceae5;
-  --accent:     #eceae5;
+  --background: var(--dark-background, #1a170f);
+  --foreground: var(--dark-foreground, #eceae5);
+  --accent:     var(--dark-accent, #eceae5);
   --code-border: color-mix(in srgb, var(--foreground) 15%, transparent);
 }
 

@@ -1,11 +1,11 @@
 /* Post content and typography */
 .index-content {
-  margin: 25px 0;
+  margin: var(--block-margin, 25px) 0;
 }
 
 .framed {
   border: 1px solid var(--accent);
-  padding: 20px;
+  padding: var(--post-padding, 20px);
 }
 
 .framed *:first-child {
@@ -23,7 +23,7 @@
 .post {
   width: 100%;
   text-align: left;
-  padding: 30px 0;
+  padding: var(--post-meta-padding, 30px 0);
 }
 
 .post:not(:last-of-type) {
@@ -77,11 +77,11 @@
 }
 
 .post-content {
-  margin-top: 25px;
+  margin-top: var(--block-margin, 25px);
 }
 
 .post-cover {
-  margin: 25px 0;
+  margin: var(--block-margin, 25px) 0;
 }
 
 .post ul {

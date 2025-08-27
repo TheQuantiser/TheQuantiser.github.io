@@ -1,9 +1,9 @@
 /* Footer layout and positioning */
 .footer {
-  padding: 40px 0;
+  padding: var(--footer-padding, 40px) 0;
   flex-grow: 0;
   margin-top: auto;
-  opacity: .55;
+  opacity: var(--footer-opacity, .55);
 }
 
 .footer__inner {

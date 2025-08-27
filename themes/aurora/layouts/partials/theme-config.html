@@ -1,0 +1,8 @@
+{{- $cfg := readFile "themes/aurora/config.yml" | transform.Unmarshal -}}
+<style>
+:root {
+{{- range $key, $value := $cfg }}
+  --{{ replace $key "_" "-" }}: {{ $value }};
+{{- end }}
+}
+</style>

@@ -1,0 +1,53 @@
+# Aurora Theme Style Configuration
+# Update the values below to customize common theme dimensions and colors.
+# Provide valid CSS values (including units) for each option.
+#
+# Colors
+background: "#f7f7eb"        # Background color of the site
+foreground: "#000000"        # Default text color
+accent: "#000000"            # Accent color for links and interactive elements
+dark_background: "#1a170f"   # Background when dark theme is active
+dark_foreground: "#eceae5"   # Text color in dark theme
+dark_accent: "#eceae5"       # Accent color in dark theme
+
+# Layout widths
+container_max_width: "1200px" # Maximum width of the main container
+content_max_width: "90ch"     # Maximum width for readable content
+
+# Layout spacing
+container_padding: "40px"       # Padding inside the main container
+container_padding_mobile: "20px" # Container padding on small screens
+block_margin: "25px"           # Vertical spacing for block elements
+
+# Typography
+font_size: "clamp(1rem, 1vw + 0.5rem, 1.25rem)" # Base font size for body text
+font_size_mobile: "0.95rem"    # Base font size on small screens
+line_height: "1.54em"       # Line height for body text
+
+# Global spacing
+body_margin: "0"            # Margin around the body element
+body_padding: "0"           # Padding inside the body element
+
+# Shape
+radius: "0"                 # Border radius used across components
+
+# Header
+header_padding_top: "6px"          # Space above the site header
+header_inner_margin_bottom: "10px" # Space below the header's inner container
+logo_border_radius: "8px"          # Corner roundness of the logo box
+logo_padding: "5px 10px"           # Padding inside the logo box
+
+# Button
+button_padding: "5px 18px"         # Padding for <button> elements
+button_border_width: "4px"         # Border width for <button> elements
+button_padding_large: "8px 18px"   # Padding for .button elements
+button_padding_wide: "14px 24px"   # Padding for wide buttons
+button_min_width: "200px"          # Minimum width for wide buttons
+
+# Post
+post_padding: "20px"          # Padding inside post containers
+post_meta_padding: "30px 0"   # Padding around post metadata
+
+# Footer
+footer_padding: "40px"       # Vertical padding for the footer
+footer_opacity: "0.55"      # Opacity of the footer content

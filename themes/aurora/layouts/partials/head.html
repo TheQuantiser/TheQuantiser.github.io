@@ -20,6 +20,7 @@
 {{ if (fileExists "static/theme.css") }}<link rel="stylesheet" href="{{ "theme.css" | absURL }}">{{ end }}
 {{ if (fileExists "static/style.css") }}<link rel="stylesheet" href="{{ "style.css" | absURL }}">{{ end }}
 
+{{ partial "theme-config.html" . }}
 {{/* Icons */}}
 <link rel="shortcut icon" href="{{ "favicon.png" | absURL }}">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | absURL }}">
